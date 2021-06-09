@@ -15,6 +15,9 @@ class ScrollCard extends StatefulWidget {
 
 class _ScrollCardState extends State<ScrollCard> {
 
+  final int id;
+  _ScrollCardState(this.id);
+
   Future<String> getField1() async {
     LinkedHashMap projects = await SelectedProject().getData(id);
     return projects["Field1Name"];
@@ -47,8 +50,6 @@ class _ScrollCardState extends State<ScrollCard> {
     super.initState();
   }
 
-  final int id;
-  _ScrollCardState(this.id);
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
@@ -96,18 +97,22 @@ class _ScrollCardState extends State<ScrollCard> {
                 ListView(scrollDirection: Axis.horizontal, children: <Widget>[
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: DataTable(
-                  columns: [
-                    DataColumn(
-                        label:  Text('Sr.No.',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold))),
-                    DataColumn(
-                        label: FutureBuilder(
-                          future: getField1(),
-                          builder: (context, snapshot) {
-                            var msgs = snapshot.data;
-                            if(msgs != '')
+                child: FutureBuilder(
+                  future: AiseHi(id).getIt(),
+                  builder: (context, snapshot){
+
+                    return  DataTable(
+                      columns: [
+                        DataColumn(
+                            label:  Text('Sr.No.',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold))),
+                        DataColumn(
+                          label: FutureBuilder(
+                            future: getField1(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
                               {
                                 return Text(
                                     '$msgs',
@@ -115,117 +120,104 @@ class _ScrollCardState extends State<ScrollCard> {
                                         fontSize: 18, fontWeight: FontWeight.bold)
                                 );
                               }
-                            else{
-                              return Text('--',style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold));
-                            }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
 
-                          },
-                        ),),
-                    DataColumn(
-                        label:  FutureBuilder(
-                          future: getField2(),
-                          builder: (context, snapshot) {
-                            var msgs = snapshot.data;
-                            if(msgs != '')
-                            {
-                              return Text(
-                                  '$msgs',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold)
-                              );
-                            }
-                            else{
-                              return Text('--',style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold));
-                            }
+                            },
+                          ),),
+                        DataColumn(
+                          label:  FutureBuilder(
+                            future: getField2(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
+                              {
+                                return Text(
+                                    '$msgs',
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold)
+                                );
+                              }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
 
-                          },
-                        ),),
-                    DataColumn(
-                        label:  FutureBuilder(
-                          future: getField3(),
-                          builder: (context, snapshot) {
-                            var msgs = snapshot.data;
-                            if(msgs != '')
-                            {
-                              return Text(
-                                  '$msgs',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold)
-                              );
-                            }
-                            else{
-                              return Text('--',style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold));
-                            }
+                            },
+                          ),),
+                        DataColumn(
+                          label:  FutureBuilder(
+                            future: getField3(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
+                              {
+                                return Text(
+                                    '$msgs',
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold)
+                                );
+                              }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
 
-                          },
-                        ),),
-                    DataColumn(
-                        label:  FutureBuilder(
-                          future: getField4(),
-                          builder: (context, snapshot) {
-                            var msgs = snapshot.data;
-                            if(msgs != '')
-                            {
-                              return Text(
-                                  '$msgs',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold)
-                              );
-                            }
-                            else{
-                              return Text('--',style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold));
-                            }
+                            },
+                          ),),
+                        DataColumn(
+                          label:  FutureBuilder(
+                            future: getField4(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
+                              {
+                                return Text(
+                                    '$msgs',
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold)
+                                );
+                              }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
 
-                          },
-                        ),),
-                    DataColumn(
-                        label: FutureBuilder(
-                          future: getField5(),
-                          builder: (context, snapshot) {
-                            var msgs = snapshot.data;
-                            if(msgs != '')
-                            {
-                              return Text(
-                                  '$msgs',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold)
-                              );
-                            }
-                            else{
-                              return Text('--',style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold));
-                            }
+                            },
+                          ),),
+                        DataColumn(
+                          label: FutureBuilder(
+                            future: getField5(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
+                              {
+                                return Text(
+                                    '$msgs',
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold)
+                                );
+                              }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
 
-                          },
-                        ),),
-                    DataColumn(
-                        label: Text(' ',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold))),
-                  ],
-                  rows: AiseHi().fillRows(id),
-                  // [
-                  //   DataRow(cells: [
-                  //     DataCell(Text('15')),
-                  //     DataCell(
-                  //         Text('Scientist')
-                  //     ),
-                  //     DataCell(Text('Scientist')),
-                  //     DataCell(Text('Actor')),
-                  //     DataCell(Text('Actor')),
-                  //     DataCell(Text('Actor')),
-                  //     DataCell(
-                  //       Checkbox(value: true, onChanged: null),
-                  //     ),
-                  //   ]),
-                  // ],
+                            },
+                          ),),
+                        DataColumn(
+                            label: Text(' ',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold))),
+                      ],
+                      rows: AiseHi(id).allTheRows,
+                    );
+                  },
                 ),
               ),
-            ]),
+            ],),
           ),
         ],
       ),
@@ -236,10 +228,27 @@ class _ScrollCardState extends State<ScrollCard> {
 
 class AiseHi{
 
+  final int id;
+  AiseHi(this.id){
+    this.getIt();
+  }
+
   List<DataRow> allTheRows = [];
 
-  List<DataRow> fillRows(int id){
-    var temp = MessageLastDay().getAllMessages(id);
-    return allTheRows;
+  Future<List<DataRow>> getIt() async{
+    List temp = await MessageLastDay().getAllMessages(this.id);
+    for(int i=0;i<temp.length;i++){
+      this.allTheRows.add(DataRow(cells: [
+        DataCell(Checkbox(value: true, onChanged: null),),
+        DataCell(Text(temp[i]['Field1'],),),
+        DataCell(Text(temp[i]['Field2'],),),
+        DataCell(Text(temp[i]['Field3'],),),
+        DataCell(Text(temp[i]['Field4'],),),
+        DataCell(Text(temp[i]['Field5'],),),
+        // DataCell(Text(temp[i]['id'],),),
+      ],),);
+    }
+    print(allTheRows);
+    return this.allTheRows;
   }
 }

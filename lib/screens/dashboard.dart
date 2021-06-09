@@ -5,7 +5,6 @@ import 'package:beyond_static_app/screens/dashboardCards/purpleCard.dart';
 import 'package:beyond_static_app/screens/dashboardCards/userCard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dashboardCards/bottomCard.dart';
 import 'package:beyond_static_app/screens/dashboardCards/createNewCard.dart';
 
 class DashBoard extends StatefulWidget {
@@ -16,8 +15,6 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
 
   CardCreator cc = CardCreator();
-
-  late final _future = CardCreator().getAllCards();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +43,6 @@ class _DashBoardState extends State<DashBoard> {
                     SizedBox(
                       height: 10,
                     ),
-
                     Container(
                       child: FutureBuilder(
                         future: cc.getAllCards(),
@@ -62,8 +58,6 @@ class _DashBoardState extends State<DashBoard> {
                         },
                       ),
                     ),
-
-
                     SizedBox(
                       height: 10,
                     ),

@@ -19,14 +19,17 @@ class MessageLastDay {
     return projects['count'];
   }
 
-  void getAllMessages(int id) async{
+  Future<List> getAllMessages(int id) async{
     String? token = await storage.read(key: "jwt");
     String? username = await storage.read(key: "username");
-    String url = "$SERVER_IP/projectobjects/$id/$username";
+    String id2 = id.toString();
+    String url = "$SERVER_IP/projectobjects/$id2/$username";
 
     var res = await http.get(Uri.parse(url), headers: {
       "Authorization": "$token",
+      "Content-Type": "application/json"
     });
-   return(json.decode(res.body));
+
+    return(json.decode(res.body));
   }
 }

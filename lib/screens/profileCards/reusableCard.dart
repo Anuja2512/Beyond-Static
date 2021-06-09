@@ -1,5 +1,3 @@
-import 'dart:collection';
-import 'package:beyond_static_app/screens/allTheBrains/projectBrain.dart';
 import 'package:beyond_static_app/screens/projectData.dart';
 import 'package:flutter/material.dart';
 
@@ -27,9 +25,12 @@ class ReusableCard extends StatelessWidget {
         ], color: colour, borderRadius: BorderRadius.circular(20.0)),
       ),
       onTap: () {
-        // Navigator.pushNamed(context, '/project_data');
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (ctx)=>ProjectData(id: id,),),
+          MaterialPageRoute(
+            builder: (ctx) => ProjectData(
+              id: id,
+            ),
+          ),
         );
       },
     );

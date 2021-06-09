@@ -1,3 +1,10 @@
+import 'dart:collection';
+
+import 'package:beyond_static_app/screens/allTheBrains/activeBrain.dart';
+import 'package:beyond_static_app/screens/allTheBrains/deleteBrain.dart';
+import 'package:beyond_static_app/screens/allTheBrains/editprojectBrain.dart';
+import 'package:beyond_static_app/screens/allTheBrains/scrollBrain.dart';
+import 'package:beyond_static_app/screens/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'profileCards/scrollCard.dart';
@@ -12,9 +19,64 @@ class ProjectData extends StatefulWidget {
 }
 
 class _ProjectDataState extends State<ProjectData> {
+  Future<String> getProjectName() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["ProjectName"];
+  }
+  Future<String> giveStatus() async {
+    LinkedHashMap projects = await Active().statusInvert(id);
+    return projects["status"];
+  }
+  Future<String> getDescription() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Description"];
+  }
+  Future<String> getEntriesNum() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["totalMessages"].toString();
+  }
+  Future<String> getURL() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["EndpointURL"];
+  }
+  Future<String> getField1() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field1Name"];
+  }
+  Future<String> getField2() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field2Name"];
+  }
+  Future<String> getField3() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field3Name"];
+  }
+  Future<String> getField4() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field4Name"];
+  }
+  Future<String> getField5() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field5Name"];
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getProjectName();
+    getEntriesNum();
+    getDescription();
+    getField1();
+    getField2();
+    getField3();
+    getField4();
+    getField5();
+    getURL();
+    super.initState();
+  }
 
   final int id;
-  _ProjectDataState(this.id)
+  _ProjectDataState(this.id);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +89,6 @@ class _ProjectDataState extends State<ProjectData> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
-                  //Projectname container ka design
                   margin: EdgeInsets.all(12.0),
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.only(left: 10, top: 10, right: 10),
@@ -48,17 +109,32 @@ class _ProjectDataState extends State<ProjectData> {
                     children: [
                       Row(
                         //Project container ka nam
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Expanded(
-                            child: Text(
-                              'PROJECT NAME',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: FutureBuilder(
+                              future: getProjectName(),
+                              builder: (context, snapshot) {
+                                var msgs = snapshot.data;
+                                if(msgs != '')
+                                {
+                                  return Text(
+                                      '$msgs',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                }
+                                else{
+                                  return Text('--',style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold));
+                                }
+
+                              },
                             ),
+
                           ),
                           SizedBox(
                             width: 10,
@@ -73,7 +149,7 @@ class _ProjectDataState extends State<ProjectData> {
                                 size: 24.0,
                               ),
                             ),
-                            onTap: (){
+                            onTap: () {
                               Navigator.pushNamed(context, '/dashboard');
                               Navigator.pushNamed(context, '/nav');
                             },
@@ -86,31 +162,55 @@ class _ProjectDataState extends State<ProjectData> {
                       Row(
                         children: <Widget>[
                           //entries vala
-                          Text(
-                            '13 new entries',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                            ),
+                          FutureBuilder(
+                            future: getEntriesNum(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
+                              {
+                                return Text(
+                                  '$msgs new entries',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14.0,
+                                  ),
+                                );
+                              }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
+
+                            },
                           ),
+
+
                           SizedBox(
-                            width: 30.0,
+                            width: 25.0,
                           ),
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 20,
-                            child: SvgPicture.asset(
-                              'images/stop_data.svg',
-                              color: Color(0xFF272D3B),
+                          InkWell(
+                            child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 20,
+                              child: SvgPicture.asset(
+                                'images/stop_data.svg',
+                                color: Color(0xFF272D3B),
+                              ),
                             ),
+                            onTap: (){
+                             Active().statusInvert(id);
+                             Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                               builder: (BuildContext context) => Nav(),
+                             ),);
+                            },
                           ),
                           SizedBox(
                             width: 5.0,
                           ),
 
                           // ignore: deprecated_member_use
-                           InkWell(
-                             child: CircleAvatar(
+                          InkWell(
+                              child: CircleAvatar(
                                 backgroundColor: Colors.white,
                                 radius: 20, //icon refresh
                                 child: SvgPicture.asset(
@@ -118,11 +218,12 @@ class _ProjectDataState extends State<ProjectData> {
                                   color: Color(0xFF272D3B),
                                 ),
                               ),
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/project_data');
-                                  print('ho raha hai');
-                                }
-                           ),
+                              onTap: () {
+                                Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                  builder: (BuildContext context) => ProjectData(id: id),
+                                ),);
+                                print('ho raha hai');
+                              }),
                           SizedBox(
                             width: 5.0,
                           ),
@@ -135,8 +236,12 @@ class _ProjectDataState extends State<ProjectData> {
                                 color: Color(0xFF272D3B),
                               ),
                             ),
-                            onTap: (){
-                              Navigator.pushNamed(context, '/delete_brain');
+                            onTap: () {
+                             Delete().projectDelete(id);
+                             Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                               builder: (BuildContext context) => Nav(),
+                             ),);
+
                             },
                           ),
                           SizedBox(
@@ -151,8 +256,14 @@ class _ProjectDataState extends State<ProjectData> {
                                 color: Color(0xFF272D3B),
                               ),
                             ),
-                            onTap: (){
-                              Navigator.pushNamed(context, '/editproject_brain');
+                            onTap: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (ctx) => EditProject(
+                                    id: id,
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         ],
@@ -165,7 +276,7 @@ class _ProjectDataState extends State<ProjectData> {
                   margin: EdgeInsets.all(12),
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.all(10),
-                  height: 140,
+
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -193,21 +304,35 @@ class _ProjectDataState extends State<ProjectData> {
                       ),
                       Row(children: [
                         Expanded(
-                          child: Text(
-                            //description ka element
-                            'He found a leprechaun in his walnut shell.',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18.0,
-                            ),
+                          child:
+                          FutureBuilder(
+                            future: getDescription(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
+                              {
+                                return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18.0,
+                                  ),
+                                );
+                              }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
+
+                            },
                           ),
+
                         ),
                       ]),
-
                     ],
                   ),
                 ),
-                ScrollCard(),
+                ScrollCard(id: id),
                 Container(
                   margin: EdgeInsets.all(10),
                   alignment: Alignment.topLeft,
@@ -248,11 +373,27 @@ class _ProjectDataState extends State<ProjectData> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Field 1',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ))
+                        FutureBuilder(
+                          future: getField1(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  )
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),
                       ]),
                       SizedBox(
                         height: 5,
@@ -266,11 +407,27 @@ class _ProjectDataState extends State<ProjectData> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Field 2',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ))
+                        FutureBuilder(
+                          future: getField2(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  )
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),
                       ]),
                       SizedBox(
                         height: 5,
@@ -284,14 +441,30 @@ class _ProjectDataState extends State<ProjectData> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Field 3',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ))
+                        FutureBuilder(
+                          future: getField3(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  )
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),
                       ]),
                       SizedBox(
-                        height: 0,
+                        height: 5,
                       ),
                       Row(children: <Widget>[
                         Icon(
@@ -302,11 +475,61 @@ class _ProjectDataState extends State<ProjectData> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('Field 4',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            )),
+                        FutureBuilder(
+                          future: getField4(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  )
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),
+                      ]),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Row(children: <Widget>[
+                        Icon(
+                          Icons.circle,
+                          color: Color(0xFF2D62ED),
+                          size: 9.5,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        FutureBuilder(
+                          future: getField5(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  )
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),
                       ]),
                     ],
                   ),
@@ -352,11 +575,27 @@ class _ProjectDataState extends State<ProjectData> {
                         SizedBox(
                           width: 10,
                         ),
-                        Text('www.url.com',
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                            )),
+                        FutureBuilder(
+                          future: getURL(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),
                       ]),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,

@@ -12,6 +12,7 @@ class _PurpleCardState extends State<PurpleCard> {
     var totalMessages = await MessageLastDay().gethrsMessagesCount();
     return totalMessages.toString();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,10 +37,10 @@ class _PurpleCardState extends State<PurpleCard> {
               Container(
                 child: FutureBuilder(
                   future: getMessages(),
-                  builder: (context, snapshot){
+                  builder: (context, snapshot) {
                     var msgs = snapshot.data;
 
-                    return  Text(
+                    return Text(
                       '$msgs',
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
@@ -61,7 +62,6 @@ class _PurpleCardState extends State<PurpleCard> {
           SizedBox(
             height: 10.0,
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -84,7 +84,7 @@ class _PurpleCardState extends State<PurpleCard> {
               Text(
                 'the last 24 hours',
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 14.0,
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
                 ),
@@ -94,7 +94,6 @@ class _PurpleCardState extends State<PurpleCard> {
           SizedBox(
             height: 10.0,
           ),
-
         ],
       ),
     );

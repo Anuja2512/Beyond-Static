@@ -1,5 +1,6 @@
 import 'package:beyond_static_app/dialogBox.dart';
 import 'package:beyond_static_app/screens/allTheBrains/loginBrain.dart';
+import 'package:beyond_static_app/screens/nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -214,9 +215,9 @@ class _LoginState extends State<Login> {
                                         key: "jwt",
                                         value: jwt.toString(),
                                       );
-                                      Navigator.pushNamed(context, '/nav',
-                                          arguments: (Route<dynamic> route) =>
-                                              false);
+                                      Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                        builder: (BuildContext context) => Nav(),
+                                      ),);
                                     } else {
                                       displayDialog(
                                           context,

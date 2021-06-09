@@ -16,14 +16,22 @@ class CardCreator {
     for (int i = 0; i < length; i++) {
       LinkedHashMap project = projects[i];
       int id = project['id'] as int;
+      String stateText;
+      Color clrcard = project['ProjectStatus'] ? Color(0xFFFF007C) : Color(0xFF7D00B5);
+      if(clrcard == Color(0xFFFF007C)){
+        stateText = 'Active';
+      }
+      else{
+        stateText = 'Inactive';
+      }
       String projectName = project['ProjectName'] as String;
       ids.add(id);
       cards.add(
         ReusableCard(
-          colour: Color(0xFF7D00B5),
+          colour: clrcard,
           cardChild: CardContent(
             title: projectName,
-            state: 'active',
+            state: stateText,
           ),
           id: id,
         ),
@@ -32,11 +40,9 @@ class CardCreator {
     return cards;
   }
 
-  Future<int> getLength()async{
+  Future<int> getLength()async {
     var projects = await ProjectOptions().getProjects();
     this.length = projects.length;
     return length;
   }
-
-
 }

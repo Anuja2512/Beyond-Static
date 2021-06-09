@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
         '/project_data': (context) => ProjectData(id: 0,),
         '/new_project': (context) => NewProject(),
         '/settings_brain': (context) => SettingBrain(),
-        '/editproject_brain':(context) => EditProject(),
-        '/delete_brain':(context) => Delete(),
+
+
       },
       debugShowCheckedModeBanner: false,
     );

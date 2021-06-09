@@ -1,4 +1,7 @@
+import 'package:beyond_static_app/dialogBox.dart';
 import 'package:beyond_static_app/screens/allTheBrains/projectBrain.dart';
+import 'package:beyond_static_app/screens/allTheBrains/updateProjectBrain.dart';
+import 'package:beyond_static_app/screens/projectData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,11 +11,14 @@ const titleStyle = TextStyle(
 );
 
 class EditProject extends StatefulWidget {
+  final int id;
+  const EditProject({required this.id});
   @override
-  _EditProjectState createState() => _EditProjectState();
+  _EditProjectState createState() => _EditProjectState(id);
 }
 
 class _EditProjectState extends State<EditProject> {
+
   TextEditingController _projectController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
   TextEditingController _urlController = TextEditingController();
@@ -27,6 +33,9 @@ class _EditProjectState extends State<EditProject> {
   bool fieldFive = false;
   int counter = 1;
   bool button = true;
+
+  final int id;
+  _EditProjectState(this.id);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +62,7 @@ class _EditProjectState extends State<EditProject> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Create New Server',
+                      'Update Project',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 26.0,
@@ -68,7 +77,7 @@ class _EditProjectState extends State<EditProject> {
                           color: Colors.white,
                         ),
                       ),
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(context, '/projectdata');
                       },
                     ),
@@ -127,7 +136,7 @@ class _EditProjectState extends State<EditProject> {
                             child: TextField(
                               decoration: InputDecoration(
                                 contentPadding:
-                                EdgeInsets.only(left: 12.0, bottom: 14.0),
+                                    EdgeInsets.only(left: 12.0, bottom: 14.0),
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -173,7 +182,7 @@ class _EditProjectState extends State<EditProject> {
                               maxLines: 6,
                               decoration: InputDecoration(
                                 contentPadding:
-                                EdgeInsets.only(left: 12.0, bottom: 14.0),
+                                    EdgeInsets.only(left: 12.0, bottom: 14.0),
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -218,7 +227,7 @@ class _EditProjectState extends State<EditProject> {
                             child: TextField(
                               decoration: InputDecoration(
                                 contentPadding:
-                                EdgeInsets.only(left: 12.0, bottom: 14.0),
+                                    EdgeInsets.only(left: 12.0, bottom: 14.0),
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -305,7 +314,7 @@ class _EditProjectState extends State<EditProject> {
                                 //   fontStyle: FontStyle.italic,
                                 // ),
                                 contentPadding:
-                                EdgeInsets.only(left: 12.0, bottom: 14.0),
+                                    EdgeInsets.only(left: 12.0, bottom: 14.0),
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
@@ -568,8 +577,45 @@ class _EditProjectState extends State<EditProject> {
                           ),
                           // ignore: deprecated_member_use
                           child: FlatButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              if (_projectController.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
+                              else if (_descriptionController.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
+                              else if (_urlController.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
+                              else if (_field1Controller.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
 
+                              else {
+                                var res = await UpdateProjectBrain().projectUpdate(
+                                  id,
+                                  _projectController.text,
+                                  _descriptionController.text,
+                                  _urlController.text,
+                                  _field1Controller.text,
+                                  _field2Controller.text,
+                                  _field3Controller.text,
+                                  _field4Controller.text,
+                                  _field5Controller.text,
+                                );
+                                if (res == 201) {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (ctx) => ProjectData(
+                                        id: id,
+                                      ),
+                                    ),
+                                  );
+                                  //Navigator.pushNamed(context, '/nav');
+                                } else {
+                                  print(res);
+                                }
+                              }
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

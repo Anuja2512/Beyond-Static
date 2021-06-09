@@ -22,6 +22,7 @@ class ProfileBrain {
     });
 
     var body = json.decode(res.body);
+
     if (body['status'] == '200 OK')
       return 201;
     else return 409;

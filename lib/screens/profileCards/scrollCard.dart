@@ -1,29 +1,60 @@
+import 'dart:collection';
+
+import 'package:beyond_static_app/screens/allTheBrains/gethrsMessages.dart';
 import 'package:beyond_static_app/screens/allTheBrains/scrollBrain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
-
-// ignore: must_be_immutable
 class ScrollCard extends StatefulWidget {
-
-
+  final int id;
+  const ScrollCard({required this.id});
   @override
-  _ScrollCardState createState() => _ScrollCardState();
+  _ScrollCardState createState() => _ScrollCardState(id);
 }
 
 class _ScrollCardState extends State<ScrollCard> {
 
-
+  Future<String> getField1() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field1Name"];
+  }
+  Future<String> getField2() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field2Name"];
+  }
+  Future<String> getField3() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field3Name"];
+  }
+  Future<String> getField4() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field4Name"];
+  }
+  Future<String> getField5() async {
+    LinkedHashMap projects = await SelectedProject().getData(id);
+    return projects["Field5Name"];
+  }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    getField1();
+    getField2();
+    getField3();
+    getField4();
+    getField5();
+    super.initState();
+  }
+
+  final int id;
+  _ScrollCardState(this.id);
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10),
       alignment: Alignment.topLeft,
       padding: EdgeInsets.all(10.0),
-      height: MediaQuery.of(context).size.height/1.5,
+      height: MediaQuery.of(context).size.height / 1.5,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white, //field container
@@ -42,10 +73,13 @@ class _ScrollCardState extends State<ScrollCard> {
             children: [
               Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Text('Form Data',style:TextStyle(
-                  fontSize: 26.0,
-                  fontWeight: FontWeight.w900,
-                ),),
+                child: Text(
+                  'Form Data',
+                  style: TextStyle(
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
               ),
               CircleAvatar(
                 backgroundColor: Colors.white,
@@ -55,151 +89,157 @@ class _ScrollCardState extends State<ScrollCard> {
                   color: Colors.black,
                 ),
               ),
-
             ],
           ),
-
-
           Expanded(
-            child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-
-
+            child:
+                ListView(scrollDirection: Axis.horizontal, children: <Widget>[
               SingleChildScrollView(
-                scrollDirection:Axis.vertical,
+                scrollDirection: Axis.vertical,
                 child: DataTable(
                   columns: [
-                    DataColumn(label: Text(
-                        'No.',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                    )),
-                    DataColumn(label: Text(
-                        'Field 01',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                    )),
-                    DataColumn(label: Text(
-                        'Field 02',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                    )),
-                    DataColumn(label: Text(
-                        'Field 03',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                    )),
-                    DataColumn(label: Text(
-                        'Field 04',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                    )),
-                    DataColumn(label: Text(
-                        'Field 05',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                    )),
-                    DataColumn(label: Text(
-                        ' ',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-                    )),
+                    DataColumn(
+                        label:  Text('Sr.No.',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold))),
+                    DataColumn(
+                        label: FutureBuilder(
+                          future: getField1(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                              {
+                                return Text(
+                                    '$msgs',
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold)
+                                );
+                              }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),),
+                    DataColumn(
+                        label:  FutureBuilder(
+                          future: getField2(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold)
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),),
+                    DataColumn(
+                        label:  FutureBuilder(
+                          future: getField3(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold)
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),),
+                    DataColumn(
+                        label:  FutureBuilder(
+                          future: getField4(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold)
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),),
+                    DataColumn(
+                        label: FutureBuilder(
+                          future: getField5(),
+                          builder: (context, snapshot) {
+                            var msgs = snapshot.data;
+                            if(msgs != '')
+                            {
+                              return Text(
+                                  '$msgs',
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold)
+                              );
+                            }
+                            else{
+                              return Text('--',style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold));
+                            }
+
+                          },
+                        ),),
+                    DataColumn(
+                        label: Text(' ',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold))),
                   ],
-                  rows: [
-
-                    DataRow(cells: [
-                      DataCell(Text('1')), //Sr. No
-                      DataCell(Text('Stephen')), //Field 01
-                      DataCell(Text('Actor')),  //Field 02
-                      DataCell(Text('Actor')),  //Field 03
-                      DataCell(Text('Actor')),  //Field 04
-                      DataCell(Text('Actor')),  //Field 05
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('1')),
-                      DataCell(Text('Stephen')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('15')),
-                      DataCell(Text('Peter')),
-                      DataCell(Text('Scientist')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text('15')),
-                      DataCell(Text('Peter')),
-                      DataCell(Text('Scientist')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-
-
-                    DataRow(cells: [
-                      DataCell(Text('15')),
-                      DataCell(Text('Peter')),
-                      DataCell(Text('Scientist')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Text('Actor')),
-                      DataCell(Checkbox(value: true, onChanged: null),),
-                    ]),
-                  ],
+                  rows: AiseHi().fillRows(id),
+                  // [
+                  //   DataRow(cells: [
+                  //     DataCell(Text('15')),
+                  //     DataCell(
+                  //         Text('Scientist')
+                  //     ),
+                  //     DataCell(Text('Scientist')),
+                  //     DataCell(Text('Actor')),
+                  //     DataCell(Text('Actor')),
+                  //     DataCell(Text('Actor')),
+                  //     DataCell(
+                  //       Checkbox(value: true, onChanged: null),
+                  //     ),
+                  //   ]),
+                  // ],
                 ),
               ),
             ]),
           ),
-    ],
+        ],
       ),
     );
+  }
+}
+
+
+class AiseHi{
+
+  List<DataRow> allTheRows = [];
+
+  List<DataRow> fillRows(int id){
+    var temp = MessageLastDay().getAllMessages(id);
+    return allTheRows;
   }
 }

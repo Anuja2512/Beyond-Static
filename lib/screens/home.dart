@@ -30,35 +30,38 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CircleAvatar(
-                      radius: 32.0,
+                      radius: 30.0,
                       backgroundColor: Colors.grey.shade100,
                     ),
                     CircleAvatar(
-                      radius: 32.0,
+                      radius: 30.0,
                       backgroundColor: Colors.grey.shade100,
                     ),
                     CircleAvatar(
-                      radius: 32.0,
+                      radius: 30.0,
                       backgroundColor: Colors.grey.shade100,
                     ),
                     CircleAvatar(
-                      radius: 32.0,
+                      radius: 30.0,
                       backgroundColor: Colors.grey.shade100,
                     ),
                     CircleAvatar(
-                      radius: 32.0,
+                      radius: 30.0,
                       backgroundColor: Colors.grey.shade100,
                     ),
                   ],
                 ),
                 padding: EdgeInsets.all(13.0),
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(
-                      offset: Offset.zero,
-                      spreadRadius: 3.0,
-                      blurRadius: 6.0,
-                      color: Color(0x272D3B33)),
-                ], color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          offset: Offset.zero,
+                          spreadRadius: 3.0,
+                          blurRadius: 6.0,
+                          color: Color(0x272D3B33)),
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.0)),
               ),
             ],
           ),

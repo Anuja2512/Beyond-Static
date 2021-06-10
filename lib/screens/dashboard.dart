@@ -13,7 +13,6 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-
   CardCreator cc = CardCreator();
 
   @override
@@ -46,9 +45,8 @@ class _DashBoardState extends State<DashBoard> {
                     Container(
                       child: FutureBuilder(
                         future: cc.getAllCards(),
-                        builder: (context, snapshot){
-
-                          return  Container(
+                        builder: (context, snapshot) {
+                          return Container(
                             child: SingleChildScrollView(
                               child: Column(
                                 children: cc.cards,

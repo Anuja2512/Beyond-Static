@@ -1,4 +1,6 @@
+import 'package:beyond_static_app/dialogBox.dart';
 import 'package:beyond_static_app/screens/allTheBrains/projectBrain.dart';
+import 'package:beyond_static_app/screens/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -68,9 +70,11 @@ class _NewProjectState extends State<NewProject> {
                           color: Colors.white,
                         ),
                       ),
-                      onTap: (){
-                        Navigator.pushNamed(context, '/dashboard');
-                        Navigator.pushNamed(context, '/nav');
+                      onTap: () {
+                        Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) => Nav(),
+                        ),);
+
                       },
                     ),
                   ],
@@ -570,16 +574,34 @@ class _NewProjectState extends State<NewProject> {
                           // ignore: deprecated_member_use
                           child: FlatButton(
                             onPressed: () {
-                              ProjectOptions().createProject(
-                                _projectController.text,
-                                _descriptionController.text,
-                                _urlController.text,
-                                _field1Controller.text,
-                                _field2Controller.text,
-                                _field3Controller.text,
-                                _field4Controller.text,
-                                _field5Controller.text,
-                              );
+                              if (_projectController.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
+                              else if (_descriptionController.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
+                              else if (_urlController.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
+                              else if (_field1Controller.text == '')
+                                displayDialog(context, "Field cannot be empty",
+                                    "Please enter your data in the area provided");
+                              else {
+                                ProjectOptions().createProject(
+                                  _projectController.text,
+                                  _descriptionController.text,
+                                  _urlController.text,
+                                  _field1Controller.text,
+                                  _field2Controller.text,
+                                  _field3Controller.text,
+                                  _field4Controller.text,
+                                  _field5Controller.text,
+                                );
+                                Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                  builder: (BuildContext context) => Nav(),
+                                ),);
+                              }
+
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,

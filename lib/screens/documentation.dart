@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Documentation extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _DocumentationState extends State<Documentation> {
                 child: Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.only(left: 20, top: 20, right: 20),
-                    height: 190,
+
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -37,7 +38,7 @@ class _DocumentationState extends State<Documentation> {
                         Row(children: [
                           Expanded(
                               child: Text(
-                            'Welcome To Beyond Static',
+                            'Your Contribution In Code',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 26,
@@ -51,7 +52,7 @@ class _DocumentationState extends State<Documentation> {
                         Row(children: [
                           Expanded(
                               child: Text(
-                            "What's New In Beyond Static",
+                            "Beyond Static Is Completely Open Source And You Can Contribute To The Code!!!",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -72,7 +73,7 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('21 new charts',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Django REST Framework - Backend',style: TextStyle(fontSize: 15),))
                           ],
                         ),
                         SizedBox(
@@ -88,7 +89,7 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('15 new reports',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('ReactJS - Web Framework',style: TextStyle(fontSize: 15),))
                           ],
                         ),
                         SizedBox(
@@ -104,12 +105,18 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('45 new messages',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Flutter - App Framework',style: TextStyle(fontSize: 15),))
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                       ],
                     )),
-                onTap: () {},
+                onTap: () {
+
+                  launch("https://beyondstatic.netlify.app/contribute");
+                },
               ),
               SizedBox(
                 height: 15,
@@ -149,7 +156,7 @@ class _DocumentationState extends State<Documentation> {
                         Row(children: [
                           Expanded(
                               child: Text(
-                            "What's New In Beyond Static",
+                            "Learn To Connect Your Static Page Form To A Backend",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -170,7 +177,7 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('21 new charts',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Creating a Project',style: TextStyle(fontSize: 15),))
                           ],
                         ),
                         SizedBox(
@@ -186,7 +193,7 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('15 new reports',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Setting up the Form in Static Site',style: TextStyle(fontSize: 15),))
                           ],
                         ),
                         SizedBox(
@@ -202,12 +209,14 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('45 new messages',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Click here to know more!',style: TextStyle(fontSize: 15),))
                           ],
                         )
                       ],
                     )),
-                onTap: () {},
+                onTap: () {
+                  launch("https://beyondstatic.netlify.app/docs");
+                },
               ),
               SizedBox(
                 height: 15,
@@ -216,7 +225,7 @@ class _DocumentationState extends State<Documentation> {
                 child: Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.only(left: 20, top: 20, right: 20),
-                    height: 190,
+
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -233,7 +242,7 @@ class _DocumentationState extends State<Documentation> {
                         Row(children: [
                           Expanded(
                               child: Text(
-                            'How You Can Help Us ?',
+                            'Know More About Us',
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 26,
@@ -247,7 +256,7 @@ class _DocumentationState extends State<Documentation> {
                         Row(children: [
                           Expanded(
                               child: Text(
-                            "What's New In Beyond Static",
+                            "Introduction To Our Team",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 18,
@@ -268,7 +277,7 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('21 new charts',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Devang Kamble - Full Stack Developer',style: TextStyle(fontSize: 15),))
                           ],
                         ),
                         SizedBox(
@@ -284,7 +293,7 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('15 new reports',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Alfhad Shah - Flutter Developer',style: TextStyle(fontSize: 15),))
                           ],
                         ),
                         SizedBox(
@@ -300,12 +309,65 @@ class _DocumentationState extends State<Documentation> {
                             SizedBox(
                               width: 10,
                             ),
-                            Expanded(child: Text('45 new messages',style: TextStyle(fontSize: 15),))
+                            Expanded(child: Text('Aayush Chaudhary - 3D Generalist',style: TextStyle(fontSize: 15),))
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.circle,
+                              color: Colors.pink,
+                              size: 12,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(child: Text('Anuja Jadhav - Flutter Developer',style: TextStyle(fontSize: 15),))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.circle,
+                              color: Colors.pink,
+                              size: 12,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(child: Text('Sanjay Ausare - Front-End Developer',style: TextStyle(fontSize: 15),))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.circle,
+                              color: Colors.pink,
+                              size: 12,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(child: Text('Lalu Nair - Flutter Developer',style: TextStyle(fontSize: 15),))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                       ],
                     )),
-                onTap: () {},
+                onTap: () {
+                  launch("https://beyondstatic.netlify.app/aboutus");
+                },
               )
             ])),
       )),

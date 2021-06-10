@@ -7,6 +7,7 @@ const SERVER_IP = 'https://beyond-static.herokuapp.com/api';
 final storage = FlutterSecureStorage();
 
 class SelectedProject {
+
   Future<LinkedHashMap> getData(int id) async {
     String? token = await storage.read(key: "jwt");
     String? username = await storage.read(key: "username");

@@ -1,5 +1,6 @@
 import 'package:beyond_static_app/dialogBox.dart';
 import 'package:beyond_static_app/screens/allTheBrains/profileBrain.dart';
+import 'package:beyond_static_app/screens/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -239,7 +240,9 @@ class _SettingBrainState extends State<SettingBrain> {
                                   _emailController.text,
                                 );
                                 if (res == 201) {
-                                  Navigator.pushNamed(context, '/nav');
+                                  Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                    builder: (BuildContext context) => Nav(),
+                                  ),);
                                 } else {
                                   print('error hai yaar');
                                 }

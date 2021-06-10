@@ -17,7 +17,7 @@ class _NavState extends State<Nav> {
   List indexes = [false, false, false, false, false];
 
   List _widgetOptions = [
-    Home(),
+    //Home(),
     DashBoard(),
     Documentation(),
     Settings(),
@@ -29,15 +29,15 @@ class _NavState extends State<Nav> {
       bottomNavigationBar: ConvexAppBar(
         backgroundColor: Colors.white,
         items: [
-          TabItem(
-            icon: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: SvgPicture.asset(
-                'images/house.svg',
-                color: Color(0xFF2D62ED),
-              ),
-            ),
-          ),
+          // TabItem(
+          //   icon: CircleAvatar(
+          //     backgroundColor: Colors.white,
+          //     child: SvgPicture.asset(
+          //       'images/house.svg',
+          //       color: Color(0xFF2D62ED),
+          //     ),
+          //   ),
+          // ),
           TabItem(
             icon: CircleAvatar(
               backgroundColor: Colors.white,

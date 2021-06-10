@@ -286,7 +286,7 @@ class _SettingsState extends State<Settings> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
                               child: FutureBuilder(
@@ -305,9 +305,7 @@ class _SettingsState extends State<Settings> {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              width: 220.0,
-                            ),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -365,7 +363,7 @@ class _SettingsState extends State<Settings> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
                               child: FutureBuilder(
@@ -384,9 +382,7 @@ class _SettingsState extends State<Settings> {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              width: 220.0,
-                            ),
+
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -486,6 +482,4 @@ class _SettingsState extends State<Settings> {
   }
 }
 
-// Container(
-// child:
-// );
+

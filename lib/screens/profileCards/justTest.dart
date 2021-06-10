@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:json_table/json_table.dart';
 
 class ScrollTable {
-  Future<Widget?> getTable(int id) async {
+  Future<Widget> getTable(int id) async {
     String temp = await MessageLastDay().getAllMessages(id);
     var json = jsonDecode(temp);
     var columns = [

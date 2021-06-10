@@ -111,12 +111,17 @@ class _ScrollCardState extends State<ScrollCard> {
               children: <Widget>[
                 SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: FutureBuilder(
+                  child: FutureBuilder<Widget>(
                     future: ScrollTable().getTable(id),
                     builder: (context, snapshot) {
-                      return Container(
-                        child: ScrollTable().getTable(id),
-                      );
+                      if(!snapshot.hasData){
+                        return CircularProgressIndicator();
+                      }
+                      return snapshot.data!;
+                      // if(snapshot.hasData){
+                      //  print(snapshot.data);
+                      // }
+                      // return Text('Hello');
                     },
                   ),
                 ),

@@ -125,7 +125,7 @@ class _DocumentationState extends State<Documentation> {
                 child: Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.only(left: 20, top: 20, right: 20),
-                    height: 190,
+
                     width: double.infinity,
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -211,7 +211,10 @@ class _DocumentationState extends State<Documentation> {
                             ),
                             Expanded(child: Text('Click here to know more!',style: TextStyle(fontSize: 15),))
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                       ],
                     )),
                 onTap: () {

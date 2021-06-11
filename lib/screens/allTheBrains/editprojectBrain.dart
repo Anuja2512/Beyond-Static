@@ -78,7 +78,9 @@ class _EditProjectState extends State<EditProject> {
                         ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, '/projectdata');
+                        Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                          builder: (BuildContext context) => ProjectData(id: id),
+                        ),);
                       },
                     ),
                   ],
@@ -627,6 +629,7 @@ class _EditProjectState extends State<EditProject> {
                                     fontSize: 18.0,
                                   ),
                                 ),
+
                                 CircleAvatar(
                                   radius: 17.0,
                                   backgroundColor: Color(0x55FFFFFF),

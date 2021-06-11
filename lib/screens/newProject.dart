@@ -54,13 +54,16 @@ class _NewProjectState extends State<NewProject> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Create New Server',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 26.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                RichText(
+                text: TextSpan(
+                text: 'Create New Server',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 26.0,
+                      fontWeight: FontWeight.bold),
+                ),
+      ),
+
                     InkWell(
                       child: CircleAvatar(
                         radius: 17.0,
@@ -613,6 +616,7 @@ class _NewProjectState extends State<NewProject> {
                                     fontSize: 18.0,
                                   ),
                                 ),
+                                SizedBox(width: 3,),
                                 CircleAvatar(
                                   radius: 17.0,
                                   backgroundColor: Color(0x55FFFFFF),

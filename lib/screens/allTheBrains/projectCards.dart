@@ -25,11 +25,13 @@ class CardCreator {
         stateText = 'Inactive';
       }
       String projectName = project['ProjectName'] as String;
+      String projectDesc = project['Description'] as String;
       ids.add(id);
       cards.add(
         ReusableCard(
           colour: clrcard,
           cardChild: CardContent(
+            desc: projectDesc,
             title: projectName,
             state: stateText,
           ),

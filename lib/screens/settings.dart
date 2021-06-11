@@ -90,6 +90,7 @@ class _SettingsState extends State<Settings> {
             Container(
               margin: EdgeInsets.all(13.0),
               padding: EdgeInsets.fromLTRB(24.0, 30.0, 17.0, 17.0),
+              width: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0xFFFFFFFF),
                 boxShadow: [
@@ -119,14 +120,18 @@ class _SettingsState extends State<Settings> {
                           builder: (context, snapshot){
                             var username = snapshot.data;
                             print(snapshot.data);
-                            return  Text(
-                              '$username',
-                              style: TextStyle(
-                                color: Color(0xFF272D3B),
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w900,
+                            return   RichText(
+                              text: TextSpan(
+                                text: '$username',
+                                style: TextStyle(
+                                  color: Color(0xFF272D3B),
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w900,
+                                ),
                               ),
                             );
+
+
                           },
                         ),
                       ),
@@ -141,19 +146,24 @@ class _SettingsState extends State<Settings> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(15.0, 11.0, 17.0, 11.0),
                         child: Container(
+                          width: MediaQuery.of(context).size.width /1.4,
                           child: FutureBuilder(
                             future: getFirstName(),
                             builder: (context, snapshot){
                               var firstname = snapshot.data;
                               print(snapshot.data);
-                              return  Text(
-                                '$firstname',
-                                style: TextStyle(
-                                  color: Color(0xFF272D3B),
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w900,
+                              return   RichText(
+                                text: TextSpan(
+                                  text: '$firstname',
+                                  style: TextStyle(
+                                    color: Color(0xFF272D3B),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w900,
+                                  ),
                                 ),
                               );
+
+
                             },
                           ),
                         ),
@@ -170,20 +180,27 @@ class _SettingsState extends State<Settings> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(15.0, 11.0, 17.0, 11.0),
                         child: Container(
-                          child: FutureBuilder(
-                            future: getLastName(),
-                            builder: (context, snapshot){
-                              var lastname = snapshot.data;
-                              print(snapshot.data);
-                              return  Text(
-                                '$lastname',
-                                style: TextStyle(
-                                  color: Color(0xFF272D3B),
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              );
-                            },
+                          width: MediaQuery.of(context).size.width /1.4,
+                          child: Expanded(
+                            child: FutureBuilder(
+                              future: getLastName(),
+                              builder: (context, snapshot){
+                                var lastname = snapshot.data;
+                                print(snapshot.data);
+                                return   RichText(
+                                  text: TextSpan(
+                                    text: '$lastname',
+                                    style: TextStyle(
+                                      color: Color(0xFF272D3B),
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                );
+
+
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -199,20 +216,27 @@ class _SettingsState extends State<Settings> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(15.0, 11.0, 17.0, 11.0),
                         child: Container(
-                          child: FutureBuilder(
-                            future: getEmail(),
-                            builder: (context, snapshot){
-                              var email = snapshot.data;
-                              print(snapshot.data);
-                              return  Text(
-                                '$email',
-                                style: TextStyle(
-                                  color: Color(0xFF272D3B),
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              );
-                            },
+                          width: MediaQuery.of(context).size.width /1.4,
+                          child: Expanded(
+                            child: FutureBuilder(
+                              future: getEmail(),
+                              builder: (context, snapshot){
+                                var email = snapshot.data;
+                                print(snapshot.data);
+                                return  RichText(
+                                  text: TextSpan(
+                                    text: '$email',
+                                    style: TextStyle(
+                                      color: Color(0xFF272D3B),
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                );
+
+
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -325,14 +349,17 @@ class _SettingsState extends State<Settings> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              'Number of Projects',
-                              style: TextStyle(
-                                letterSpacing: 0.5,
-                                fontSize: 22.0,
-                                color: Colors.white,
-                              ),
-                            ),
+                        RichText(
+                        text: TextSpan(
+                        text: 'Number of Projects',
+                          style: TextStyle(
+                            letterSpacing: 0.5,
+                            fontSize: 22.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                  ),
+
                           ],
                         ),
                         SizedBox(
@@ -402,14 +429,17 @@ class _SettingsState extends State<Settings> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              'All-Time Messages',
-                              style: TextStyle(
-                                letterSpacing: 0.5,
-                                fontSize: 22.0,
-                                color: Colors.white,
+                            RichText(
+                              text: TextSpan(
+                                text: 'All-Time Messages',
+                                style: TextStyle(
+                                  letterSpacing: 0.5,
+                                  fontSize: 22.0,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
+
                           ],
                         ),
                         SizedBox(

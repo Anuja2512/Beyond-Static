@@ -82,9 +82,9 @@ class _PurpleCardState extends State<PurpleCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                'the last 24 hours',
+                'last 24 Hrs',
                 style: TextStyle(
-                  fontSize: 14.0,
+                  fontSize: 18.0,
                   color: Colors.white,
                   fontWeight: FontWeight.w400,
                 ),

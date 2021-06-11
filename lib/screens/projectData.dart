@@ -6,8 +6,10 @@ import 'package:beyond_static_app/screens/allTheBrains/editprojectBrain.dart';
 import 'package:beyond_static_app/screens/allTheBrains/scrollBrain.dart';
 import 'package:beyond_static_app/screens/nav.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'profileCards/scrollCard.dart';
 
 class ProjectData extends StatefulWidget {
@@ -162,137 +164,146 @@ class _ProjectDataState extends State<ProjectData> {
                       SizedBox(
                         height: 15,
                       ),
+
                       Row(
-                        children: <Widget>[
-                          //entries vala
-                          FutureBuilder(
-                            future: getEntriesNum(),
-                            builder: (context, snapshot) {
-                              var msgs = snapshot.data;
-                              if(msgs != '')
-                              {
-                                return Text(
-                                  '$msgs new entries',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14.0,
-                                  ),
-                                );
-                              }
-                              else{
-                                return Text('--',style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold));
-                              }
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                        Row(
+                          children: [
+                            FutureBuilder(
+                              future: getEntriesNum(),
+                              builder: (context, snapshot) {
+                                var msgs = snapshot.data;
+                                if(msgs != '')
+                                {
+                                  return Text(
+                                    '$msgs new entries',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14.0,
+                                    ),
+                                  );
+                                }
+                                else{
+                                  return Text('--',style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.bold));
+                                }
 
-                            },
-                          ),
-
-
-                          SizedBox(
-                            width: 25.0,
-                          ),
-                          InkWell(
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 20,
-                              child: SvgPicture.asset(
-                                'images/stop_data.svg',
-                                color: Color(0xFF272D3B),
-                              ),
+                              },
                             ),
-                            onTap: (){
-                             Active().statusInvert(id);
-                             Navigator.pushReplacement(context, MaterialPageRoute<void>(
-                               builder: (BuildContext context) => Nav(),
-                             ),);
-                            },
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
+                          ],
+                        ),
+                        Row(
 
-                          // ignore: deprecated_member_use
-                          InkWell(
+                          children: <Widget>[
+                            //entries vala
+
+                            InkWell(
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                radius: 20, //icon refresh
+                                radius: 20,
                                 child: SvgPicture.asset(
-                                  'images/reload.svg',
+                                  'images/stop_data.svg',
+                                  color: Color(0xFF272D3B),
+                                ),
+                              ),
+                              onTap: (){
+                                Active().statusInvert(id);
+                                Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                  builder: (BuildContext context) => Nav(),
+                                ),);
+                              },
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+
+                            // ignore: deprecated_member_use
+                            InkWell(
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 20, //icon refresh
+                                  child: SvgPicture.asset(
+                                    'images/reload.svg',
+                                    color: Color(0xFF272D3B),
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                    builder: (BuildContext context) => ProjectData(id: id),
+                                  ),);
+                                  print('ho raha hai');
+                                }),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            InkWell(
+                              child: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 20,
+                                child: SvgPicture.asset(
+                                  'images/delete_data.svg',
                                   color: Color(0xFF272D3B),
                                 ),
                               ),
                               onTap: () {
-                                Navigator.pushReplacement(context, MaterialPageRoute<void>(
-                                  builder: (BuildContext context) => ProjectData(id: id),
-                                ),);
-                                print('ho raha hai');
-                              }),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          InkWell(
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 20,
-                              child: SvgPicture.asset(
-                                'images/delete_data.svg',
-                                color: Color(0xFF272D3B),
-                              ),
-                            ),
-                            onTap: () {
-                              showDialog<String>(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text('Are You Sure?'),
-                                  content: const Text('This action cannot be reverted. Click Yes to delete the project.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                        child: Text('No'),
-                                      onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute<void>(
-                                        builder: (BuildContext context) => ProjectData(id: id),
-                                      ),);}
-                                    ),
-                                    TextButton(
-                                      child: Text('Yes'),
-                                      onPressed: () {
-                                        Delete().projectDelete(id);
-                                        Navigator.pushReplacement(context, MaterialPageRoute<void>(
-                                          builder: (BuildContext context) => Nav(),
-                                        ),);
-                                      }
-                                    ),
-                                  ],
-                                ),
-                              );
-
-
-
-                            },
-                          ),
-                          SizedBox(
-                            width: 5.0,
-                          ),
-                          InkWell(
-                            child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 20, //description ka edit icon
-                              child: SvgPicture.asset(
-                                'images/edit_data.svg',
-                                color: Color(0xFF272D3B),
-                              ),
-                            ),
-                            onTap: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (ctx) => EditProject(
-                                    id: id,
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) => AlertDialog(
+                                    title: const Text('Are You Sure?'),
+                                    content: const Text('This action cannot be reverted. Click Yes to delete the project.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                          child: Text('No'),
+                                          onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                            builder: (BuildContext context) => ProjectData(id: id),
+                                          ),);}
+                                      ),
+                                      TextButton(
+                                          child: Text('Yes'),
+                                          onPressed: () {
+                                            Delete().projectDelete(id);
+                                            Navigator.pushReplacement(context, MaterialPageRoute<void>(
+                                              builder: (BuildContext context) => Nav(),
+                                            ),);
+                                          }
+                                      ),
+                                    ],
                                   ),
+                                );
+
+
+
+                              },
+                            ),
+                            SizedBox(
+                              width: 5.0,
+                            ),
+                            InkWell(
+                              child: CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 20, //description ka edit icon
+                                child: SvgPicture.asset(
+                                  'images/edit_data.svg',
+                                  color: Color(0xFF272D3B),
                                 ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => EditProject(
+                                      id: id,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],),
+
+
+
                     ],
                   ),
                 ),
@@ -300,7 +311,7 @@ class _ProjectDataState extends State<ProjectData> {
                   //description container
                   margin: EdgeInsets.all(12),
                   alignment: Alignment.topLeft,
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.fromLTRB(20, 20, 30, 20),
 
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -320,7 +331,8 @@ class _ProjectDataState extends State<ProjectData> {
                           'Description', //description ka element
                           style: TextStyle(
                             color: Color(0xFF2D62ED),
-                            fontSize: 18.0,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
                           ),
                         ),
                       ]),
@@ -338,9 +350,11 @@ class _ProjectDataState extends State<ProjectData> {
                               {
                                 return Text(
                                   '$msgs',
+
+                                  textAlign: TextAlign.justify,
                                   style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18.0,
+                                    fontSize: 17.0,
                                   ),
                                 );
                               }
@@ -362,7 +376,7 @@ class _ProjectDataState extends State<ProjectData> {
                   margin: EdgeInsets.all(10),
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.fromLTRB(20.0, 20.0, 10.0, 10.0),
-                  height: 190,
+
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white, //field container
@@ -563,7 +577,7 @@ class _ProjectDataState extends State<ProjectData> {
                   margin: EdgeInsets.all(10),
                   alignment: Alignment.topLeft,
                   padding: EdgeInsets.fromLTRB(20, 20, 10, 10),
-                  height: 120,
+
                   width: double.infinity,
                   decoration: BoxDecoration(
                     //website link container
@@ -600,44 +614,43 @@ class _ProjectDataState extends State<ProjectData> {
                         SizedBox(
                           width: 10,
                         ),
-                        FutureBuilder(
-                          future: getURL(),
-                          builder: (context, snapshot) {
-                            var msgs = snapshot.data;
-                            if(msgs != '')
-                            {
-                              return Text(
-                                  '$msgs',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
+                        Expanded(
+                          child: FutureBuilder(
+                            future: getURL(),
+                            builder: (context, snapshot) {
+                              var msgs = snapshot.data;
+                              if(msgs != '')
+                              {
+                                return RichText(
+                                  text: TextSpan(
+                                    text: '$msgs',
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        launch("$msgs");
+                                      },
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.blue,
+                                    ),
                                   ),
-                              );
-                            }
-                            else{
-                              return Text('--',style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold));
-                            }
+                                );
 
-                          },
+
+                              }
+                              else{
+                                return Text('--',style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold));
+                              }
+                            },
+                          ),
                         ),
                       ]),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          CircleAvatar(
-                            radius: 18.0,
-                            backgroundColor: Color(0xFF2D62ED),
-                            child: SvgPicture.asset(
-                              'images/edit_data.svg',
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      )
+                      SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
+
                 ),
               ],
             ),

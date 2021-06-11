@@ -27,6 +27,7 @@ class _UserCardState extends State<UserCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
+                width: MediaQuery.of(context).size.width / 1.2,
                 child: FutureBuilder(
                   future: getUsername(),
                   builder: (context, snapshot){

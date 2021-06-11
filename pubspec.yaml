@@ -38,6 +38,7 @@ dependencies:
   syncfusion_flutter_charts: ^19.1.67
   json_table: ^2.0.1
   url_launcher: ^6.0.6
+  readmore: ^2.1.0
 
 
 

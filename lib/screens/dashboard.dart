@@ -56,9 +56,9 @@ class _DashBoardState extends State<DashBoard> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    // SizedBox(
+                    //   height: 10,
+                    // ),
                     Row(
                       children: [
                         Expanded(child: BlueCard()),
@@ -73,6 +73,9 @@ class _DashBoardState extends State<DashBoard> {
                     //   height: 10,
                     // ),
                     PinkCard(),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               ),
